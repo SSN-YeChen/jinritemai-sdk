@@ -1,0 +1,24 @@
+{
+    "name": "yeronghao/my-sdk",
+    "description": "我的SDK合集",
+    "type": "project",
+    "require-dev": {
+    "php": "^7.3"
+    },
+    "authors": [
+    {
+        "name": "yeronghao",
+        "email": "376600500@qq.com"
+    }
+    ],
+        "minimum-stability": "dev",
+        "require": {
+        "php": ">=5.4.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "YeRongHao\\my-sdk\\": "src/"
+        }
+    }
+}
