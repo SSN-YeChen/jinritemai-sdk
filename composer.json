@@ -20,5 +20,6 @@
         "psr-4": {
             "YeRongHao\\my-sdk\\": "src/"
         }
-    }
+    },
+    "license": "MIT"
 }
