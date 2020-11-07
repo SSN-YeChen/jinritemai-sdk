@@ -1,8 +1,6 @@
-
 {
     "name": "yeronghao/jinritemai-sdk",
     "description": "抖店SDK",
-
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +14,7 @@
 
     "autoload": {
         "psr-4": {
-            "YeRongHao\\my-sdk\\": "src/"
+            "yeronghao\\jinritemai-sdk\\": "src/"
         }
     }
 }
