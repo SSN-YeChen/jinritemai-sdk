@@ -3,7 +3,6 @@
     "description": "抖店SDK",
     "type": "project",
     "require-dev": {
-    "php": "^7.3"
     },
     "authors": [
     {
