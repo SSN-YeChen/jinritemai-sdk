@@ -1,5 +1,5 @@
 <?php
-namespace YeRongHao\Jinritemai;
+namespace YeRongHao\JinritemaiSdk;
 
 use Couchbase\Exception;
 

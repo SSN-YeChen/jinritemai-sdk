@@ -1,5 +1,5 @@
 <?php
-namespace yeronghao\jinritemai;
+namespace YeRongHao\JinritemaiSdk;
 class Common{
 
     /**

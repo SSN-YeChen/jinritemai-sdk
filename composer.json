@@ -15,7 +15,7 @@
 
     "autoload": {
         "psr-4": {
-            "yeronghao\\jinritemai-sdk\\": "src/"
+            "YeRongHao\\JinritemaiSdk\\": "src/"
         }
     }
 }
