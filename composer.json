@@ -8,6 +8,7 @@
             "email": "376600500@qq.com"
         }
     ],
+    "minimum-stability": "dev-master",
     "require": {
         "php": ">=5.4.0"
     },
