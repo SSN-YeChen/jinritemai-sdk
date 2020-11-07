@@ -1,8 +1,7 @@
 <?php
-namespace yeronghao\jinritemai;
+namespace YeRongHao\Jinritemai;
 
 use Couchbase\Exception;
-use yeronghao\jinritemai\product\ProductList;
 
 class JinritemaiService extends Common
 {
