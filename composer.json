@@ -1,17 +1,16 @@
+
 {
     "name": "yeronghao/jinritemai-sdk",
     "description": "抖店SDK",
-    "type": "project",
-    "require-dev": {
-    },
+
+    "license": "MIT",
     "authors": [
-    {
-        "name": "yeronghao",
-        "email": "376600500@qq.com"
-    }
+        {
+            "name": "YeRongHao",
+            "email": "376600500@qq.com"
+        }
     ],
-        "minimum-stability": "1.0.0",
-        "require": {
+    "require": {
         "php": ">=5.4.0"
     },
 
@@ -19,6 +18,5 @@
         "psr-4": {
             "YeRongHao\\my-sdk\\": "src/"
         }
-    },
-    "license": "MIT"
+    }
 }
