@@ -217,9 +217,9 @@ class JinritemaiService extends Common
      * @return mixed
      * @throws \Couchbase\Exception
      */
-    public function getProductList($page = 0,$size = 100,$status = 0,$check_status = 3){
+    public function getProductList($page = 0,$size = 100,$status = 0,$checkStatus = 3){
         $apiUrl = $this->host.$this->method(self::PRODUCT_LIST);
-        $param = $this->makeParam(self::PRODUCT_LIST,compact('page','size','status','check_status'));
+        $param = $this->makeParam(self::PRODUCT_LIST,$this->compact($page,$size,$status,$checkStatus));
         $requestQuery = $this->getRequestQuery($apiUrl,$param);
         return $requestQuery;
     }
@@ -227,14 +227,36 @@ class JinritemaiService extends Common
 
     /**
      * Notes: 获取sku列表
-     * @param $product_id
+     * @param $productId
      * @return mixed
      * @throws Exception
      */
-    public function getSkuList($product_id){
+    public function getSkuList($productId){
         $apiUrl = $this->host.$this->method(self::SKU_LIST);
-        $param = $this->makeParam(self::SKU_LIST,compact('product_id'));
+        $param = $this->makeParam(self::SKU_LIST,$this->compact($productId));
         $requestQuery = $this->getRequestQuery($apiUrl,$param);
         return $requestQuery;
     }
+
+
+    /**
+     * Notes: 获取订单列表
+     * @param $startTime 开始时间 2018/06/03 00:00:00
+     * @param $endTime 结束时间
+     * @param $orderStatus 子订单状态 1在线支付订单待支付；货到付款订单待确认 2备货中（只有此状态下，才可发货）3已发货 4已取消 5已完成
+     * @param int $page 页数（默认为0，第一页从0开始）
+     * @param int $size 每页订单数（默认为10，最大100）
+     * @param string $orderBy 值为“create_time”：按订单创建时间；值为“update_time”：按订单更新时间
+     * @param int $isDesc 订单排序方式：0(is_desc，最近的在前)， 1(asc，最近的在后)
+     * @return mixed
+     * @throws Exception
+     */
+    public function getOrderList($startTime,$endTime,$orderStatus,$page = 1,$size = 100,$orderBy = 'create_time',$isDesc = 0){
+        $apiUrl = $this->host.$this->method(self::SKU_LIST);
+        $param = $this->makeParam(self::SKU_LIST,$this->compact($startTime,$endTime,$orderStatus,$page,$size,$orderBy,$isDesc));
+        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        return $requestQuery;
+    }
+
+
 }

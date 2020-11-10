@@ -1,7 +1,7 @@
 <?php
 namespace YeRongHao\JinritemaiSdk;
-class Common{
 
+class Common{
     /**
      * Notes:GET 请求
      * @param $url
@@ -74,5 +74,30 @@ class Common{
         }else{
             return false;
         }
+    }
+
+    /**
+     * Notes: 驼峰命名风格转换成下划线命名风格
+     * @param $string
+     * @return string
+     */
+    public function parseUnderline($string)
+    {
+        //替换过程 NameStyle => N | S => _N | _S => _Name_Style => Name_Style => name_style
+        $string = strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $string), "_"));
+        return $string;
+    }
+
+    /**
+     * Notes:
+     * @param mixed ...$array
+     * @return array
+     */
+    public function compact(...$array){
+        $data = [];
+        foreach ($array as $value){
+            $data[$this->parseUnderline($value)] = $value;
+        }
+        return $data;
     }
 }
