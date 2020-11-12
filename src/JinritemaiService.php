@@ -137,6 +137,9 @@ class JinritemaiService extends Common
      */
     protected function makeParamJson($paramArr){
         ksort($paramArr,SORT_STRING);
+        foreach ($paramArr as &$value){
+            $value = (string)$value;
+        }
         return json_encode($paramArr,JSON_HEX_TAG);
     }
 
@@ -222,8 +225,14 @@ class JinritemaiService extends Common
      */
     public function getProductList($page = 0,$size = 100,$status = 0,$checkStatus = 3){
         $apiUrl = $this->host.self::PRODUCT_LIST;
-        $param = $this->makeParam($this->method(self::PRODUCT_LIST),$this->compact($page,$size,$status,$checkStatus));
-        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        $param = [
+            'page' => $page,
+            'size' => $size,
+            'status' => $status,
+            'check_status' => $checkStatus
+        ];
+        $this->makeParam($this->method(self::PRODUCT_LIST),$param);
+        $requestQuery = $this->getRequestQuery($apiUrl,$this->param);
         return $requestQuery;
     }
 
@@ -236,8 +245,11 @@ class JinritemaiService extends Common
      */
     public function getSkuList($productId){
         $apiUrl = $this->host.self::SKU_LIST;
-        $param = $this->makeParam($this->method(self::SKU_LIST),$this->compact($productId));
-        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        $param = [
+            'product_id' => $productId
+        ];
+        $this->makeParam($this->method(self::SKU_LIST),$param);
+        $requestQuery = $this->getRequestQuery($apiUrl,$this->param);
         return $requestQuery;
     }
 
@@ -256,8 +268,17 @@ class JinritemaiService extends Common
      */
     public function getOrderList($startTime,$endTime,$orderStatus,$page = 1,$size = 100,$orderBy = 'create_time',$isDesc = 0){
         $apiUrl = $this->host.self::ORDER_LIST;
-        $param = $this->makeParam($this->method(self::ORDER_LIST),$this->compact($startTime,$endTime,$orderStatus,$page,$size,$orderBy,$isDesc));
-        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        $param = [
+            'start_time' => $startTime,
+            'end_time' => $endTime,
+            'order_starts' => $orderStatus,
+            'page' => $page,
+            'size' => $size,
+            'order_by' => $orderBy,
+            'is_desc' => $isDesc
+        ];
+        $this->makeParam($this->method(self::ORDER_LIST),$param);
+        $requestQuery = $this->getRequestQuery($apiUrl,$this->param);
         return $requestQuery;
     }
 
@@ -270,8 +291,11 @@ class JinritemaiService extends Common
      */
     public function getOrderDetail($orderId){
         $apiUrl = $this->host.self::ORDER_DETAIL;
-        $param = $this->makeParam($this->method(self::ORDER_DETAIL),$this->compact($orderId));
-        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        $param = [
+            'order_id' => $orderId
+        ];
+        $this->makeParam($this->method(self::ORDER_DETAIL),$param);
+        $requestQuery = $this->getRequestQuery($apiUrl,$this->param);
         return $requestQuery;
     }
 }

@@ -87,17 +87,4 @@ class Common{
         $string = strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $string), "_"));
         return $string;
     }
-
-    /**
-     * Notes:
-     * @param mixed ...$array
-     * @return array
-     */
-    public function compact(...$array){
-        $data = [];
-        foreach ($array as $value){
-            $data[$this->parseUnderline($value)] = $value;
-        }
-        return $data;
-    }
 }
