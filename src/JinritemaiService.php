@@ -292,7 +292,7 @@ class JinritemaiService extends Common
     public function getOrderDetail($orderId){
         $apiUrl = $this->host.self::ORDER_DETAIL;
         $param = [
-            'order_id' => $orderId
+            'order_id' => $orderId . 'A'
         ];
         $this->makeParam($this->method(self::ORDER_DETAIL),$param);
         $requestQuery = $this->getRequestQuery($apiUrl,$this->param);
