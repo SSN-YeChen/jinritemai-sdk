@@ -17,6 +17,8 @@ class Common{
             $url .= '?' . implode("&",$path);
         }
 
+        $url = str_replace(' ','%20',$url);
+
         $oCurl = curl_init();
         if(stripos($url,"https://")!==FALSE){
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);

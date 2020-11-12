@@ -120,7 +120,7 @@ class JinritemaiService extends Common
             'method' => $method,
             'app_key' => $this->appKey,
             'param_json' => $this->makeParamJson($paramArr),
-            'timestamp' => date("Y-m-dH:i:s"),
+            'timestamp' => date("Y-m-d H:i:s"),
             'v' => $this->apiVersion,
         ];
 
