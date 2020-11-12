@@ -25,10 +25,13 @@ class JinritemaiService extends Common
     const OAUTH_URL = 'oauth2/access_token';
     //产品列表
     const PRODUCT_LIST = 'product/list';
-
     //sku 列表
     const SKU_LIST  = 'sku/list';
 
+    //订单列表
+    const ORDER_LIST = 'order/list';
+    //订单详情
+    const ORDER_DETAIL = 'order/detail';
 
     /**
      *  请求参数返回错误代码
@@ -72,7 +75,7 @@ class JinritemaiService extends Common
         $this->toutiaoId = isset($options['toutiao_id']) ? $options['toutiao_id'] : '';
 
         //处理 access_token
-        $this->accessToken = $this->getAccessToken();
+        $this->getAccessToken();
     }
 
 
@@ -101,7 +104,8 @@ class JinritemaiService extends Common
         if($requestQuery['err_no'] === 0){
             //存入redis
             $this->setCache($redisKey,$requestQuery['data']['access_token']);
-            return $this->accessToken = $requestQuery['data']['access_token'];
+            $this->accessToken = $requestQuery['data']['access_token'];
+            return true;
         }
 
         //TODO :  记录获取 access_token 获取失败并通知相关人员
@@ -199,7 +203,6 @@ class JinritemaiService extends Common
         }
 
         //TODO :  记录错误日志
-        throw new Exception($requestQuery);
     }
 
 
@@ -218,8 +221,8 @@ class JinritemaiService extends Common
      * @throws \Couchbase\Exception
      */
     public function getProductList($page = 0,$size = 100,$status = 0,$checkStatus = 3){
-        $apiUrl = $this->host.$this->method(self::PRODUCT_LIST);
-        $param = $this->makeParam(self::PRODUCT_LIST,$this->compact($page,$size,$status,$checkStatus));
+        $apiUrl = $this->host.self::PRODUCT_LIST;
+        $param = $this->makeParam($this->method(self::PRODUCT_LIST),$this->compact($page,$size,$status,$checkStatus));
         $requestQuery = $this->getRequestQuery($apiUrl,$param);
         return $requestQuery;
     }
@@ -232,8 +235,8 @@ class JinritemaiService extends Common
      * @throws Exception
      */
     public function getSkuList($productId){
-        $apiUrl = $this->host.$this->method(self::SKU_LIST);
-        $param = $this->makeParam(self::SKU_LIST,$this->compact($productId));
+        $apiUrl = $this->host.self::SKU_LIST;
+        $param = $this->makeParam($this->method(self::SKU_LIST),$this->compact($productId));
         $requestQuery = $this->getRequestQuery($apiUrl,$param);
         return $requestQuery;
     }
@@ -252,11 +255,23 @@ class JinritemaiService extends Common
      * @throws Exception
      */
     public function getOrderList($startTime,$endTime,$orderStatus,$page = 1,$size = 100,$orderBy = 'create_time',$isDesc = 0){
-        $apiUrl = $this->host.$this->method(self::SKU_LIST);
-        $param = $this->makeParam(self::SKU_LIST,$this->compact($startTime,$endTime,$orderStatus,$page,$size,$orderBy,$isDesc));
+        $apiUrl = $this->host.self::ORDER_LIST;
+        $param = $this->makeParam($this->method(self::ORDER_LIST),$this->compact($startTime,$endTime,$orderStatus,$page,$size,$orderBy,$isDesc));
         $requestQuery = $this->getRequestQuery($apiUrl,$param);
         return $requestQuery;
     }
 
 
+    /**
+     * Notes: 获取订单详情
+     * @param $orderId 订单ID
+     * @return mixed
+     * @throws Exception
+     */
+    public function getOrderDetail($orderId){
+        $apiUrl = $this->host.self::ORDER_DETAIL;
+        $param = $this->makeParam($this->method(self::ORDER_DETAIL),$this->compact($orderId));
+        $requestQuery = $this->getRequestQuery($apiUrl,$param);
+        return $requestQuery;
+    }
 }
