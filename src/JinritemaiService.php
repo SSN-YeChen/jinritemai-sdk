@@ -317,7 +317,7 @@ class JinritemaiService extends Common
      * @return mixed
      * @throws Exception
      */
-    public function getAfterSaleOrderList($startTime,$endTime,$type,$page = 1,$size = 100,$orderBy = 'create_time',$isDesc = 0){
+    public function getAfterSaleOrderList($startTime,$endTime,$type,$page = 0,$size = 100,$orderBy = 'create_time',$isDesc = 0){
         $apiUrl = $this->host.self::AFTER_SALE_ORDER_LIST;
         $param = [
             'start_time' => $startTime,
