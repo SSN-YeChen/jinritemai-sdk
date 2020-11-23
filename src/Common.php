@@ -21,6 +21,8 @@ class Common{
 
     protected $param;
 
+    protected $apiUrl;
+
     const OAUTH_URL = 'oauth2/access_token';
 
     /**
