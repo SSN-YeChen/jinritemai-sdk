@@ -112,6 +112,9 @@ class JinritemaiService extends Common
             $this->accessToken = $requestQuery['data']['access_token'];
             return true;
         }
+        else{
+
+        }
 
         //TODO :  记录获取 access_token 获取失败并通知相关人员
     }
@@ -163,61 +166,6 @@ class JinritemaiService extends Common
 
         return md5($this->appSecret . $signStr . $this->appSecret);
     }
-
-
-    /**
-     * Notes:设置缓存
-     * @param string $cachename
-     * @param mixed $value
-     * @return boolean
-     */
-    protected function setCache($cachename,$value){
-        //TODO :  按需调整
-        //默认过期时间是7天，提前半个小时刷新了令牌
-        $expired = 86400 * 7 - 1800;
-        $redis = redis();
-        return $redis->setex($cachename,$expired,$value);
-    }
-
-
-    /**
-     * Notes:获取缓存
-     * @param string $cachename
-     * @return mixed
-     */
-    protected function getCache($cachename){
-        //TODO :  按需调整
-        $redis = redis();
-        return $redis->get($cachename);
-    }
-
-
-    /**
-     * Notes: get请求
-     * @param $url
-     * @param $param
-     * @return mixed
-     * @throws Exception
-     */
-    protected function getRequestQuery($url,$param){
-        $requestQuery = $this->http_get($url,$param);
-
-        //判断是否请求成功
-        if(is_array($requestQuery)){
-            //判断返回状态
-            if($requestQuery['err_no'] === 0){
-                return $requestQuery["data"];
-            }
-        }
-
-        //TODO :  记录错误日志
-    }
-
-
-    protected function method($method){
-        return str_replace('/','.',$method);
-    }
-
 
     /**
      * Notes: 获取产品列表

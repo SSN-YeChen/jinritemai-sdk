@@ -1,6 +1,8 @@
 <?php
 namespace YeRongHao\JinritemaiSdk;
 
+use Couchbase\Exception;
+
 class Common{
     /**
      * Notes:GET 请求
@@ -88,5 +90,66 @@ class Common{
         //替换过程 NameStyle => N | S => _N | _S => _Name_Style => Name_Style => name_style
         $string = strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $string), "_"));
         return $string;
+    }
+
+    /**
+     * Notes:设置缓存
+     * @param string $cachename
+     * @param mixed $value
+     * @return boolean
+     */
+    public function setCache($cachename,$value){
+        //TODO :  按需调整
+        $expired = 1800;
+        $redis = redis();
+        return $redis->setex($cachename,$expired,$value);
+    }
+
+
+    /**
+     * Notes:获取缓存
+     * @param string $cachename
+     * @return mixed
+     */
+    public function getCache($cachename){
+        //TODO :  按需调整
+        $redis = redis();
+        return $redis->get($cachename);
+    }
+
+    /**
+     * Notes:清除缓存
+     * @param string $cachename
+     * @return boolean
+     */
+    public function removeCache($cachename){
+        //TODO :  按需调整
+        $redis = redis();
+        return $redis->del($cachename);
+    }
+
+    /**
+     * Notes: get请求
+     * @param $url
+     * @param $param
+     * @return mixed
+     * @throws Exception
+     */
+    public function getRequestQuery($url,$param){
+        $requestQuery = $this->http_get($url,$param);
+
+        //判断是否请求成功
+        if(is_array($requestQuery)){
+            //判断返回状态
+            if($requestQuery['err_no'] === 0){
+                return $requestQuery["data"];
+            }
+        }
+
+        //TODO :  记录错误日志
+    }
+
+    public function method($method){
+        return str_replace('/','.',$method);
     }
 }
