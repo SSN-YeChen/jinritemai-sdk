@@ -1,10 +1,11 @@
 # 抖店SDK
+
 # composer包地址
 ```
 composer require yeronghao/jinritemai-sdk
 ```
 
-# 初始化
+# 实例化
 ```
 protected $jinritemai;
 /**
@@ -20,4 +21,53 @@ public function __construct()
     ];
     $this->jinritemai = new JinritemaiService($options);
 }
+```
+
+# API调用
+目前只开发了少量的API
+具体请查看 JinritemaiService.php
+范例:
+获取上架的所有商品
+```
+$this->jinritemai->getProductList();
+```
+
+# 注意事项
+*** 一定要去调整 Common.php中的获取 redis的方法 ***
+```
+    /**
+     * Notes:设置缓存
+     * @param string $cachename
+     * @param mixed $value
+     * @return boolean
+     */
+    public function setCache($cachename,$value){
+        //TODO :  按需调整
+        $expired = 1800;
+        $redis = redis();
+        return $redis->setex($cachename,$expired,$value);
+    }
+
+
+    /**
+     * Notes:获取缓存
+     * @param string $cachename
+     * @return mixed
+     */
+    public function getCache($cachename){
+        //TODO :  按需调整
+        $redis = redis();
+        return $redis->get($cachename);
+    }
+
+    /**
+     * Notes:清除缓存
+     * @param string $cachename
+     * @return boolean
+     */
+    public function removeCache($cachename){
+        //TODO :  按需调整
+        $redis = redis();
+        return $redis->del($cachename);
+    }
 ```
