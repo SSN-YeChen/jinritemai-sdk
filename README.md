@@ -33,7 +33,7 @@ $this->jinritemai->getProductList();
 ```
 
 # 注意事项
-*** 一定要去调整 Common.php中的获取 redis的方法 ***
+***一定要去调整 Common.php中的获取 redis的方法***
 ```
     /**
      * Notes:设置缓存
