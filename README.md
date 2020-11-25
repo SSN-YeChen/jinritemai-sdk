@@ -1,3 +1,7 @@
+    composer包地址
+    composer require yeronghao/jinritemai-sdk
+    
+    
     /**
      * 初始化 加载抖音SDK
      */
@@ -6,6 +10,7 @@
         $options = [
             "app_key" => self::DY_APPKEY,
             "app_secret" => self::DY_APPSERET,
+            //抖店ID 目前用于redis的key值
             "toutiao_id" => self::DY_SHOPID
         ];
         $this->jinritemai = new JinritemaiService($options);
