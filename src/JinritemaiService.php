@@ -25,6 +25,17 @@ class JinritemaiService extends Common
         $this->getAccessToken();
     }
 
+    //验证消息推送是否合法
+    public function verificationSign($appId,$eventSign,$data){
+        if($this->appKey != $appId){
+            return false;
+        }
+        if($eventSign != md5($this->appKey . json_encode($data) . $this->appSecret)){
+            return false;
+        }
+        return true;
+    }
+
     //获取产品列表
     public function getProductList($page = 0,$size = 100,$status = 0,$checkStatus = 3){
         return (new Product\productList($this->appKey,$this->appSecret,$this->accessToken))->getProductList($page,$size,$status,$checkStatus);
@@ -33,6 +44,16 @@ class JinritemaiService extends Common
     //获取sku列表
     public function getSkuList($productId){
         return (new Sku\skuList($this->appKey,$this->appSecret,$this->accessToken))->getSkuList($productId);
+    }
+
+    //获取sku库存
+    public function getSkuStockNum($skuId,$outWarehouseId){
+        return (new Sku\skuStockNum($this->appKey,$this->appSecret,$this->accessToken))->getSkuStockNum($skuId,$outWarehouseId);
+    }
+
+    //同步sku库存
+    public function syncSkuStock($skuId,$stockNum,$outWarehouseId,$supplierId,$incremental,$idempotentId){
+        return (new Sku\skuSyncStock($this->appKey,$this->appSecret,$this->accessToken))->syncSkuStock($skuId,$stockNum,$outWarehouseId,$supplierId,$incremental,$idempotentId);
     }
 
     //获取订单列表
