@@ -1,4 +1,4 @@
-# 抖店SDK
+# 自用型抖店SDK
 调用抖店API接口  
 
 # composer包地址
