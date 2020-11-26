@@ -15,7 +15,7 @@
     "keywords" : [
         "抖店SDK",
         "抖店",
-        "jinritemai",
+        "jinritemai"
     ],
     "autoload": {
         "psr-4": {
