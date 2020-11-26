@@ -1,10 +1,11 @@
 # 抖店SDK
+调用抖店API接口  
 
 # composer包地址
 ```
 composer require yeronghao/jinritemai-sdk
 ```
-
+  
 # 实例化
 ```
 protected $jinritemai;
@@ -22,7 +23,7 @@ public function __construct()
     $this->jinritemai = new JinritemaiService($options);
 }
 ```
-
+  
 # API调用
 目前只开发了少量的API
 具体请查看 JinritemaiService.php
@@ -31,7 +32,7 @@ public function __construct()
 ```
 $this->jinritemai->getProductList();
 ```
-
+  
 # 注意事项
 ***一定要去调整 Common.php中的获取 redis的方法***
 ```

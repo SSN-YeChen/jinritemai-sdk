@@ -12,7 +12,11 @@
     "require": {
         "php": ">=5.4.0"
     },
-
+    "keywords" : [
+        "抖店SDK",
+        "抖店",
+        "jinritemai",
+    ],
     "autoload": {
         "psr-4": {
             "YeRongHao\\JinritemaiSdk\\": "src/"
