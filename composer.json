@@ -2,8 +2,6 @@
     "name": "yeronghao/jinritemai-sdk",
     "description": "抖店SDK",
     "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true ,
     "authors": [
         {
             "name": "YeRongHao",
