@@ -3,7 +3,7 @@
 
 # composer包地址
 ```
-composer require yeronghao/jinritemai-sdk
+composer require yeronghao/jinritemai-sdk:dev-master
 ```
   
 # 实例化
